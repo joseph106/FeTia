@@ -1,0 +1,66 @@
+<div>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>SKU</mat-label>
+      <input maxlength="9" matInput placeholder="SKU producto" formControlName="sku" required>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Consultar</button>
+  </form>
+</div>
+
+<div *ngIf="sku_found">
+  <div class="center-table">
+    <table class="tbl_productos">
+      <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Price</th>
+        <th>Increment</th>
+        <th>Dues</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ sku_cp }}</td>
+        <td>{{ price_cp }}</td>
+        <td>{{ increment_cp}}</td>
+        <td>{{ dues_cp }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div *ngIf="sku_not_found">
+  <div class="center-table">
+    <table class="tbl_productos">
+      <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Price</th>
+        <th>Increment</th>
+        <th>Dues</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.producto.sku }}</td>
+        <td>{{ item.producto.price }}</td>
+        <td>{{ item.incrementedPrice }}</td>
+        <td>{{ item.maxDuesNo }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination center-text">
+    <button (click)="onPageChange(page - 1)" [disabled]="page === 1" class="btn_previus">Anterior</button>
+    <span class="divisor"> Página {{ page }} de {{totalPages}} </span>
+    <button (click)="onPageChange(page + 1)" [disabled]="items.length < size" class="btn_next">Siguiente</button>
+  </div>
+  <br>
+  <span class="center-text"> Total de elementos: {{totalElement}} </span>
+
+</div>
+

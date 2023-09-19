@@ -1,0 +1,30 @@
+<div class="center-table">
+    <table class="tbl_productos">
+      <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Increment</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.sku }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.increment }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+</div>
+
+<div class="pagination center-text">
+  <button (click)="onPageChange(page - 1)" [disabled]="page === 1" class="btn_previus">Anterior</button>
+  <span class="divisor"> Página {{ page }} de {{totalPages}} </span>
+  <button (click)="onPageChange(page + 1)" [disabled]="items.length < size" class="btn_next">Siguiente</button>
+</div>
+<br>
+<span class="center-text"> Total de elementos: {{totalElement}} </span>
